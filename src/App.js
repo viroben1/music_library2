@@ -1,4 +1,7 @@
-
+import { DataContext } from './context/DataContext'
+import { useEffect, useState } from 'react'
+import Gallery from './components/Gallery'
+import SearchBar from './components/SeachBar'
 const App = () => {
   let [search, setSearch] = useState('')
   let [message, setMessage] = useState('Search for Music!')
@@ -31,12 +34,12 @@ const App = () => {
       <div>
           <SearchBar handleSearch={handleSearch} />
           {message}
-          <Gallery data={data} />
+          <DataContext.Provider value={data} >
+                <Gallery />
+            </DataContext.Provider>
       </div>
   )
 }
 
 export default App
-
-
 
