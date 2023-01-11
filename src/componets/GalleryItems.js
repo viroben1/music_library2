@@ -20,9 +20,7 @@ function GalleryItem(props) {
 
     const detailView = () => {
         return (
-            <div style={detailStyle}>
-            
-            {{
+            <div style={{
                 'width': '80vw',
                 'height': '20vh',
                 'border': '1px solid black',
@@ -32,7 +30,7 @@ function GalleryItem(props) {
                 'backgroundRepeat': 'no-repeat',
                 'backgroundSize': 'cover',
                 'color': 'white'
-            }}
+            }}>
                 <h2>{props.item.trackName}</h2>
             <h3>
             <Link to={`/artist/${props.item.artistId}`}>
