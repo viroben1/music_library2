@@ -9,7 +9,7 @@ function GalleryItem(props) {
                 'width': '25vw',
                 'height': '20vh',
                 'border': '1px solid black',
-                'margin' : '2px',
+                'margin': '2px',
                 'position': 'relative'
             }}>
                 <h3>{props.item.trackName}</h3>
@@ -24,7 +24,7 @@ function GalleryItem(props) {
                 'width': '80vw',
                 'height': '20vh',
                 'border': '1px solid black',
-                'margin' : '2px',
+                'margin': '2px',
                 'position': 'relative',
                 'backgroundImage': `url(${props.item.artworkUrl100})`,
                 'backgroundRepeat': 'no-repeat',
@@ -32,29 +32,29 @@ function GalleryItem(props) {
                 'color': 'white'
             }}>
                 <h2>{props.item.trackName}</h2>
-            <h3>
-            <Link to={`/artist/${props.item.artistId}`}>
-                    {props.item.artistName}
-                </Link>
-            </h3>
-            <h3>
-            <Link to={`/album/${props.item.collectionId}`}>
-                    {props.item.collectionName}
-                </Link>
-            </h3>
-            <h4>{props.item.primaryGenreName}</h4>
-            <h4>{props.item.releaseDate}</h4>
+                <h3>
+                    <Link to={`/artist/${props.item.artistId}`}>
+                        {props.item.artistName}
+                    </Link>
+                </h3>
+                <h3>
+                    <Link to={`/album/${props.item.collectionId}`}>
+                        {props.item.collectionName}
+                    </Link>
+                </h3>
+                <h4>{props.item.primaryGenreName}</h4>
+                <h4>{props.item.releaseDate}</h4>
             </div>
         )
     }
 
     return (
         <div onClick={() => setView(!view)}
-        style={{'display': 'inline-block'}}>
+            style={{ 'display': 'inline-block' }}>
             {view ? detailView() : simpleView()}
         </div>
     )
-} 
+}
 export default GalleryItem
 
 
