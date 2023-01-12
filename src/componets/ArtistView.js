@@ -17,7 +17,7 @@ function ArtistView() {
         }
         fetchData()
     }, [id])
-}
+
 
     const justAlbums = artistData.filter(entry => entry.collectionType === 'Album')
 
@@ -48,7 +48,7 @@ function ArtistView() {
                     {renderAlbums}
                 </div>
             )
-        
+        }
             
             
         
