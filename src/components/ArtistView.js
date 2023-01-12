@@ -1,32 +1,35 @@
 // These components will be making separate API calls from the app
-// component to serve specific data about a given album
+// component to serve specific data about our artist
 import { useState, useEffect, useNavigate } from 'react'
-import { useParams } from 'react-router-dom'
-
-function AlbumView() {
+import { useParams, Link } from 'react-router-dom'
+import Spinner from './Spinner'
+function ArtistView() {
     const navigate = useNavigate()
     const { id } = useParams()
-    const [albumData, setAlbumData] = useState([])
+    const [artistData, setArtistData] = useState([])
 
     useEffect(() => {
-        const API_URL = `http://localhost:4000/song/${id}`
+        const API_URL = `http://localhost:4000/album/${id}`
         const fetchData = async () => {
             const response = await fetch(API_URL)
             const resData = await response.json()
-            setAlbumData(resData.results)
+            setArtistData(resData.results)
         }
         fetchData()
     }, [id])
 
-    const justSongs = albumData.filter(entry => entry.wrapperType === 'track')
 
-    const renderSongs = justSongs.map((song, i) => {
+    const justAlbums = artistData.filter(entry => entry.collectionType === 'Album')
+
+    const renderAlbums = justAlbums.map((album, i) => {
         return (
             <div key={i}>
-                <p>{song.trackName}</p>
-            </div>
-        )
+                <Link to={`/album/${album.collectionId}`}>
+                    <p>{album.collectionName}</p>
+                </Link>
+            </div>)
     })
+
     const navButtons = () => {
         return (
             <div>
@@ -35,16 +38,26 @@ function AlbumView() {
                 <button onClick={() => navigate('/')}>Home</button>
             </div>
         )
+
     }
+
     return (
         <div>
+            {artistData.length > 0 ? <h2>{artistData[0].artistName}</h2> : <Spinner />}
             {navButtons()}
-            {renderSongs}
+            {renderAlbums}
         </div>
     )
 }
 
 
-export default AlbumView
+
+
+
+
+
+
+
+export default ArtistView
 
 

@@ -4,9 +4,10 @@ import Gallery from './components/Gallery'
 import SearchBar from './components/SearchBar'
 import AlbumView from './components/AlbumView'
 import ArtistView from './components/ArtistView'
-import { createResource as fetchData } from './helper'
 import Spinner from './components/Spinner'
-function App() {
+import { createResource as fetchData } from './helper'
+
+const App = () => {
     let [searchTerm, setSearch] = useState('')
     let [message, setMessage] = useState('Search for Music!')
     let [data, setData] = useState([null])

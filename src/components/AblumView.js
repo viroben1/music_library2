@@ -1,35 +1,32 @@
 // These components will be making separate API calls from the app
-// component to serve specific data about our artist
+// component to serve specific data about a given album
 import { useState, useEffect, useNavigate } from 'react'
-import { useParams, Link } from 'react-router-dom'
-
-function ArtistView() {
+import { useParams } from 'react-router-dom'
+import Spinner from './Spinner'
+function AlbumView() {
     const navigate = useNavigate()
     const { id } = useParams()
-    const [artistData, setArtistData] = useState([])
+    const [albumData, setAlbumData] = useState([])
 
     useEffect(() => {
-        const API_URL = `http://localhost:4000/album/${id}`
+        const API_URL = `http://localhost:4000/song/${id}`
         const fetchData = async () => {
             const response = await fetch(API_URL)
             const resData = await response.json()
-            setArtistData(resData.results)
+            setAlbumData(resData.results)
         }
         fetchData()
     }, [id])
 
+    const justSongs = albumData.filter(entry => entry.wrapperType === 'track')
 
-    const justAlbums = artistData.filter(entry => entry.collectionType === 'Album')
-
-    const renderAlbums = justAlbums.map((album, i) => {
+    const renderSongs = justSongs.map((song, i) => {
         return (
             <div key={i}>
-                <Link to={`/album/${album.collectionId}`}>
-                    <p>{album.collectionName}</p>
-                </Link>
-            </div>)
+                <p>{song.trackName}</p>
+            </div>
+        )
     })
-
     const navButtons = () => {
         return (
             <div>
@@ -38,25 +35,17 @@ function ArtistView() {
                 <button onClick={() => navigate('/')}>Home</button>
             </div>
         )
-
     }
-
     return (
         <div>
-            {artistData.length > 0 ? <h2>{artistData[0].artistName}</h2> : <h2>Loading...</h2>}
+            {albumData.length > 0 ? <h2>{albumData[0].collectionName}</h2> : <Spinner />}
             {navButtons()}
-            {renderAlbums}
+            {renderSongs}
         </div>
     )
 }
 
 
-
-
-
-
-
-
-export default ArtistView
+export default AlbumView
 
 
